@@ -1,0 +1,25 @@
+<app-header></app-header>
+
+<main>
+  <ul id="users">
+    <!-- dynamic outputting content using @for -->
+    @for (user of users; track user.id) {
+
+    <!-- <li *ngFor="let user of users"> -->
+    <li>
+      <app-user
+        [user]="user"
+        [selected]="selectedUserId === user.id"
+        (select)="onSelectUser($event)"
+      />
+    </li>
+    }
+  </ul>
+
+  <!-- <app-tasks [name]="selectedUser ? selectedUser.name : ''" /> -->
+  @if (selectedUser) {
+  <app-tasks [name]="selectedUser.name" [userId]="selectedUser.id" />
+  }@else {
+  <p id="fallback">select a user to see their details</p>
+  }
+</main>
